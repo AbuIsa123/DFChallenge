@@ -1,0 +1,66 @@
+﻿@model DirectFerriesChallenge.Models.UserVM
+@{
+    ViewBag.Title = "Welcome User";
+}
+
+<h2>Welcome @Html.DisplayFor(model => model.FirstName)</h2>
+
+<div class="row">
+    <div class="col-md-2">
+        No of Vowels in First Name:
+    </div>
+    <div class="col-md-1">
+        @Html.DisplayFor(model => model.NoOfVowels)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        Age:
+    </div>
+    <div class="col-md-1">
+        @Html.DisplayFor(model => model.Age)
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        Days Till Next Birthday:
+    </div>
+    <div class="col-md-1">
+        @Html.DisplayFor(model => model.DaysToNextBirthday)
+    </div>
+</div>
+<p>&nbsp;</p>
+<div class="row">
+    <table class="table table-bordered">
+        <tr>
+            @for (var i = 1; i < 15; i++)
+            {
+                <td>
+                    Day
+                </td>
+            }
+        </tr>
+        <tr>
+            @foreach (var item in Model.Dates)
+            {
+                <td>
+                    <input type="button" value="@item.DayOfWeek-@item.Date.Day" onclick="getWebsite(@item.Date.Day, @item.Date.Month)" />
+                </td>
+            }
+        </tr>
+    </table>
+</div>
+
+<script>
+    function getWebsite(Day, Month) {
+        var months = [ "January", "February", "March", "April", "May", "June", 
+           "July", "August", "September", "October", "November", "December" ];
+
+        var selectedMonthName = months[Month-1];
+        var url = "https://www.historynet.com/today-in-history/" + selectedMonthName + '-' + Day;
+
+        window.location.assign(url);
+    }
+</script>
+
+
